@@ -38,18 +38,4 @@ public class UserSystem {
     @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
-    /*
-    create table user_system (
-            id int auto_increment,
-            name varchar(100),
-    email varchar(120),
-    password varchar(255),
-    currency varchar(10),
-    created_at datetime,
-    updated_at datetime,
-    status varchar(20),
-    last_login datetime,
-    constraint user_system_pk primary key(id)
-);*/
-
 }
