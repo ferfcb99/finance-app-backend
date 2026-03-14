@@ -42,4 +42,99 @@ public class Budget {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Double getLimitAmount() {
+        return limitAmount;
+    }
+
+    public void setLimitAmount(Double limitAmount) {
+        this.limitAmount = limitAmount;
+    }
+
+    public Integer getMonth() {
+        return month;
+    }
+
+    public void setMonth(Integer month) {
+        this.month = month;
+    }
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Double getAlertThreshold() {
+        return alertThreshold;
+    }
+
+    public void setAlertThreshold(Double alertThreshold) {
+        this.alertThreshold = alertThreshold;
+    }
+
+    public UserSystem getUserSystem() {
+        return userSystem;
+    }
+
+    public void setUserSystem(UserSystem userSystem) {
+        this.userSystem = userSystem;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Budget{" +
+                "id=" + id +
+                ", limitAmount=" + limitAmount +
+                ", month=" + month +
+                ", year=" + year +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", status='" + status + '\'' +
+                ", alertThreshold=" + alertThreshold +
+                ", userSystem=" + userSystem +
+                ", category=" + category +
+                '}';
+    }
 }

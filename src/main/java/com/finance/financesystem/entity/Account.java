@@ -135,4 +135,20 @@ public class Account {
     public void setUserSystem(UserSystem userSystem) {
         this.userSystem = userSystem;
     }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", balace=" + balace +
+                ", currency='" + currency + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", userSystem=" + userSystem +
+                '}';
+    }
 }

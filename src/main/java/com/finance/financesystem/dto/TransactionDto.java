@@ -100,4 +100,18 @@ public class TransactionDto {
     public void setCategoryDto(CategoryDto categoryDto) {
         this.categoryDto = categoryDto;
     }
+
+    @Override
+    public String toString() {
+        return "TransactionDto{" +
+                "id=" + id +
+                ", type='" + type + '\'' +
+                ", amount=" + amount +
+                ", description='" + description + '\'' +
+                ", transactionDate=" + transactionDate +
+                ", status='" + status + '\'' +
+                ", reference='" + reference + '\'' +
+                ", categoryDto=" + categoryDto +
+                '}';
+    }
 }

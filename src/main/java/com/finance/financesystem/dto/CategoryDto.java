@@ -85,4 +85,17 @@ public class CategoryDto {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "CategoryDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                ", color='" + color + '\'' +
+                ", icon='" + icon + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

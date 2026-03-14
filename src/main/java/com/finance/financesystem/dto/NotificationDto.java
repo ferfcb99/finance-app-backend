@@ -62,4 +62,15 @@ public class NotificationDto {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "NotificationDto{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", type='" + type + '\'' +
+                ", isRead=" + isRead +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

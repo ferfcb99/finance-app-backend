@@ -4,7 +4,7 @@ public class AccountDto {
 
     private Long id;
 
-    private String nombre;
+    private String name;
 
     private String type;
 
@@ -17,13 +17,13 @@ public class AccountDto {
     private UserSystemDto userSystemDto;
 
 
-    public AccountDto(){
+    public AccountDto() {
     }
 
-    public AccountDto(Long id, String nombre, String type, String currency, String status, String description,
+    public AccountDto(Long id, String name, String type, String currency, String status, String description,
                       UserSystemDto userSystemDto) {
         this.id = id;
-        this.nombre = nombre;
+        this.name = name;
         this.type = type;
         this.currency = currency;
         this.status = status;
@@ -39,12 +39,12 @@ public class AccountDto {
         this.id = id;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getType() {
@@ -85,5 +85,18 @@ public class AccountDto {
 
     public void setUserSystemDto(UserSystemDto userSystemDto) {
         this.userSystemDto = userSystemDto;
+    }
+
+    @Override
+    public String toString() {
+        return "AccountDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", currency='" + currency + '\'' +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                ", userSystemDto=" + userSystemDto +
+                '}';
     }
 }
