@@ -13,7 +13,7 @@ public class Budget {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "limit_amount ")
+    @Column(name = "limit_amount")
     private Double limitAmount;
 
     @Column(name = "month")
@@ -31,6 +31,15 @@ public class Budget {
     @Column(name = "status")
     private String status;
 
-    @Column(name = "alert_threshold ")
+    @Column(name = "alert_threshold")
     private Double alertThreshold;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private UserSystem userSystem;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 }
