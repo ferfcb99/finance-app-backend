@@ -1,4 +1,6 @@
 package com.finance.financesystem.service.impl;
 
-public class UserSystemServiceImpl {
+import com.finance.financesystem.service.UserSystemService;
+
+public class UserSystemServiceImpl implements UserSystemService {
 }

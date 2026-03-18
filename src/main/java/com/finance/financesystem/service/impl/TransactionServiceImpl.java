@@ -1,4 +1,6 @@
 package com.finance.financesystem.service.impl;
 
-public class TransactionServiceImpl {
+import com.finance.financesystem.service.TransactionService;
+
+public class TransactionServiceImpl implements TransactionService {
 }

@@ -1,4 +1,6 @@
 package com.finance.financesystem.service.impl;
 
-public class CategoryServiceImpl {
+import com.finance.financesystem.service.CategoryService;
+
+public class CategoryServiceImpl implements CategoryService {
 }

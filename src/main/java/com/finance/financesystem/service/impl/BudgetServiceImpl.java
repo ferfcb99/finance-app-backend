@@ -1,4 +1,6 @@
 package com.finance.financesystem.service.impl;
 
-public class BudgetServiceImpl {
+import com.finance.financesystem.service.BudgetService;
+
+public class BudgetServiceImpl implements BudgetService {
 }
