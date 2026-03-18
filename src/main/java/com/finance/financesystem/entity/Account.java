@@ -1,7 +1,6 @@
 package com.finance.financesystem.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
