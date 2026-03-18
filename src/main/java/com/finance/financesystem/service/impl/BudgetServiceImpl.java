@@ -4,10 +4,13 @@ import com.finance.financesystem.dto.BudgetDto;
 import com.finance.financesystem.dto.CategoryDto;
 import com.finance.financesystem.dto.UserSystemDto;
 import com.finance.financesystem.entity.Budget;
+import com.finance.financesystem.entity.Category;
+import com.finance.financesystem.entity.UserSystem;
 import com.finance.financesystem.repository.BudgetRepository;
 import com.finance.financesystem.service.BudgetService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +98,45 @@ public class BudgetServiceImpl implements BudgetService {
     }
     @Override
     public BudgetDto createBudget(BudgetDto budgetDto){
-        return null;
+        UserSystem userSystem = new UserSystem(
+                budgetDto.getUserSystemDto().getId(),
+                budgetDto.getUserSystemDto().getName(),
+                budgetDto.getUserSystemDto().getEmail(),
+                budgetDto.getUserSystemDto().getPassword(),
+                budgetDto.getUserSystemDto().getCurrency(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                budgetDto.getUserSystemDto().getStatus(),
+                budgetDto.getUserSystemDto().getLastLogin()
+        );
+        Category category = new Category(
+                budgetDto.getCategoryDto().getId(),
+                budgetDto.getCategoryDto().getName(),
+                budgetDto.getCategoryDto().getType(),
+                budgetDto.getCategoryDto().getDescription(),
+                budgetDto.getCategoryDto().getColor(),
+                budgetDto.getCategoryDto().getIcon(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                budgetDto.getCategoryDto().getStatus()
+        );
+        Budget budget = new Budget(
+                null,
+                budgetDto.getLimitAmount(),
+                budgetDto.getMonth(),
+                budgetDto.getYear(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                budgetDto.getStatus(),
+                budgetDto.getAlertThreshold(),
+                userSystem,
+                category
+
+
+        );
+        Budget savedBudget = this.budgetRepository.save(budget);
+        budgetDto.setId(savedBudget.getId());
+
+        return budgetDto;
     }
 }

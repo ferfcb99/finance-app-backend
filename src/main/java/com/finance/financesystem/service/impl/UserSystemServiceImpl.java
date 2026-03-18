@@ -6,6 +6,7 @@ import com.finance.financesystem.repository.UserSystemRepository;
 import com.finance.financesystem.service.UserSystemService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,21 @@ public class UserSystemServiceImpl implements UserSystemService {
 
     @Override
     public UserSystemDto createUserSystem(UserSystemDto userSystemDto) {
-        return null;
+        UserSystem userSystem = new UserSystem(
+                null,
+                userSystemDto.getName(),
+                userSystemDto.getEmail(),
+                userSystemDto.getPassword(),
+                userSystemDto.getCurrency(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                userSystemDto.getStatus(),
+                userSystemDto.getLastLogin()
+        );
+        UserSystem saveUserSystem = this.userSystemRepository.save(userSystem);
+        userSystemDto.setId(saveUserSystem.getId());
+
+        return userSystemDto;
+
     }
 }

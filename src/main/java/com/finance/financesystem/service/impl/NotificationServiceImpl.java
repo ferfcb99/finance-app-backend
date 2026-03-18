@@ -7,6 +7,7 @@ import com.finance.financesystem.repository.NotificationRepository;
 import com.finance.financesystem.service.NotificationService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,18 @@ public class NotificationServiceImpl implements NotificationService {
 
     @Override
     public NotificationDto createNotification(NotificationDto notificationDto) {
-        return null;
+        Notification notification = new Notification(
+                null,
+                notificationDto.getMessage(),
+                notificationDto.getType(),
+                notificationDto.getRead(),
+                LocalDateTime.now(),
+                notificationDto.getStatus()
+        );
+        Notification saveNotification = this.notificationRepository.save(notification);
+        notificationDto.setId(saveNotification.getId());
+
+        return notificationDto;
+
     }
 }

@@ -12,6 +12,8 @@ public class BudgetDto {
 
     private String status;
 
+    private Double alertThreshold;
+
     private UserSystemDto userSystemDto;
 
     private CategoryDto categoryDto;
@@ -20,13 +22,14 @@ public class BudgetDto {
     public BudgetDto(){
     }
 
-    public BudgetDto(Long id, Double limitAmount, Integer month, Integer year, String status,
+    public BudgetDto(Long id, Double limitAmount, Integer month, Integer year, String status, Double alertThreshold,
                      UserSystemDto userSystemDto, com.finance.financesystem.dto.CategoryDto categoryDto) {
         this.id = id;
         this.limitAmount = limitAmount;
         this.month = month;
         this.year = year;
         this.status = status;
+        this.alertThreshold = alertThreshold;
         this.userSystemDto = userSystemDto;
         this.categoryDto = categoryDto;
     }
@@ -71,6 +74,14 @@ public class BudgetDto {
         this.status = status;
     }
 
+    public Double getAlertThreshold() {
+        return alertThreshold;
+    }
+
+    public void setAlertThreshold(Double alertThreshold) {
+        this.alertThreshold = alertThreshold;
+    }
+
     public UserSystemDto getUserSystemDto() {
         return userSystemDto;
     }
@@ -96,6 +107,7 @@ public class BudgetDto {
                 ", month=" + month +
                 ", year=" + year +
                 ", status='" + status + '\'' +
+                ", alertThreshold=" + alertThreshold +
                 ", userSystemDto=" + userSystemDto +
                 ", categoryDto=" + categoryDto +
                 '}';

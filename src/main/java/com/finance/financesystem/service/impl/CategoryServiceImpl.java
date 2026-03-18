@@ -6,6 +6,7 @@ import com.finance.financesystem.repository.CategoryRepository;
 import com.finance.financesystem.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,20 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto createCategory(CategoryDto categoryDto) {
-        return null;
+        Category category = new Category(
+                null,
+                categoryDto.getName(),
+                categoryDto.getType(),
+                categoryDto.getDescription(),
+                categoryDto.getColor(),
+                categoryDto.getIcon(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                categoryDto.getStatus()
+        );
+        Category saveCategory = this.categoryRepository.save(category);
+        categoryDto.setId(saveCategory.getId());
+
+        return categoryDto;
     }
 }

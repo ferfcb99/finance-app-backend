@@ -42,6 +42,23 @@ public class Budget {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    public Budget(){
+    }
+
+    public Budget(Long id, Double limitAmount, Integer month, Integer year, LocalDateTime createdAt, LocalDateTime
+            updatedAt, String status, Double alertThreshold, UserSystem userSystem, Category category) {
+        this.id = id;
+        this.limitAmount = limitAmount;
+        this.month = month;
+        this.year = year;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+        this.alertThreshold = alertThreshold;
+        this.userSystem = userSystem;
+        this.category = category;
+    }
+
     public Long getId() {
         return id;
     }

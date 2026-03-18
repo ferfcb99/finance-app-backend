@@ -28,6 +28,7 @@ public class AccountDto {
         this.name = name;
         this.type = type;
         this.currency = currency;
+        this.balace = balace;
         this.status = status;
         this.description = description;
         this.userSystemDto = userSystemDto;
@@ -96,6 +97,7 @@ public class AccountDto {
     public void setBalace(Double balace) {
         this.balace = balace;
     }
+
 
     @Override
     public String toString() {

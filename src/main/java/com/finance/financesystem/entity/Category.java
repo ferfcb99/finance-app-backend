@@ -37,6 +37,23 @@ public class Category {
     @Column(name = "status")
     private String status;
 
+
+    public Category(){
+    }
+
+    public Category(Long id, String name, String type, String description, String color, String icon, LocalDateTime
+            createdAt, LocalDateTime updatedAt, String status) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+        this.description = description;
+        this.color = color;
+        this.icon = icon;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
