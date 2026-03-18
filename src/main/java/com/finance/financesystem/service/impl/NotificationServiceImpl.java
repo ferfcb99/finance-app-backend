@@ -1,4 +1,6 @@
 package com.finance.financesystem.service.impl;
 
-public class NotificationServiceImpl {
+import com.finance.financesystem.service.NotificationService;
+
+public class NotificationServiceImpl implements NotificationService {
 }

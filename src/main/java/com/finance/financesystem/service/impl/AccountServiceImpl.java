@@ -1,4 +1,8 @@
 package com.finance.financesystem.service.impl;
 
-public class AccountServiceImpl {
+import com.finance.financesystem.service.AccountService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AccountServiceImpl implements AccountService {
 }
