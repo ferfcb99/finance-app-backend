@@ -14,4 +14,24 @@ import java.util.List;
 @Service
 public class NotificationServiceImpl implements NotificationService {
 
+    @Override
+    public List<NotificationDto> getAllNotification() {
+
+        return List.of();
+    }
+
+    @Override
+    public NotificationDto getByIdNotification(Long id) {
+        return null;
+    }
+
+    @Override
+    public NotificationDto createNotification(NotificationDto notificationDto) {
+        return null;
+    }
+
+    @Override
+    public NotificationDto deleteByIdNotification(Long id) {
+        return null;
+    }
 }
