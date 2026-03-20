@@ -85,5 +85,19 @@ public class BudgetDto {
 
     public void setCategoryDto(CategoryDto categoryDto) {
         this.categoryDto = categoryDto;
+
+    }
+
+    @Override
+    public String toString() {
+        return "BudgetDto{" +
+                "id=" + id +
+                ", limitAmount=" + limitAmount +
+                ", month=" + month +
+                ", year=" + year +
+                ", status='" + status + '\'' +
+                ", userSystemDto=" + userSystemDto +
+                ", categoryDto=" + categoryDto +
+                '}';
     }
 }

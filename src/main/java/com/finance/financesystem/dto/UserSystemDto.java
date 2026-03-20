@@ -87,4 +87,17 @@ public class UserSystemDto {
     public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+    @Override
+    public String toString() {
+        return "UserSystemDto{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", currency='" + currency + '\'' +
+                ", status='" + status + '\'' +
+                ", lastLogin=" + lastLogin +
+                '}';
+    }
 }
