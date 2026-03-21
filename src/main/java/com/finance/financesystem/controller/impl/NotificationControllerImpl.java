@@ -23,12 +23,11 @@ public class NotificationControllerImpl implements NotificationController{
     public NotificationControllerImpl(NotificationService notificationService){
         this.notificationService = notificationService;
 
-        //metodo para obtener todos los registros
-
     }
 
-
+    //metodo para obtener todos los registros
     @Override
+    @GetMapping(value = "/get-all-notification", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<NotificationDto>> getAllNotification() {
         logger.info("Entro al metodo getAllNotification al controlador");
         List<NotificationDto> notificationDtoList = this.notificationService.getAllNotification();
@@ -37,18 +36,36 @@ public class NotificationControllerImpl implements NotificationController{
                 .body(notificationDtoList);
     }
 
+    //metodo para obtener datos por id
     @Override
-    public ResponseEntity<NotificationDto> getByIdNotification(Long id) {
-        return null;
+    @GetMapping(value = "/get-by-id-notification/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NotificationDto> getByIdNotification(@PathVariable Long id) {
+        logger.info("Entro al metodo getByIdNotification al controlador ");
+        NotificationDto notificationById = this.notificationService.getByIdNotification(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(notificationById);
     }
 
+    // metodo para crear datos
     @Override
-    public ResponseEntity<NotificationDto> createNotification(NotificationDto notificationDto) {
-        return null;
+    @PostMapping(value = "/create-notification", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NotificationDto> createNotification(@RequestBody NotificationDto notificationDto) {
+        logger.info("Entro el metodo createNotification del controlador");
+        NotificationDto notificationCreated = this.notificationService.createNotification(notificationDto);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(notificationCreated);
     }
 
+    // metodo para eliminar datos por id
     @Override
-    public ResponseEntity<NotificationDto> deleteByIdNotification(Long id) {
-        return null;
+    @DeleteMapping(value = "/delete-by-id-notification/{id)", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<NotificationDto> deleteByIdNotification(@PathVariable Long id) {
+        logger.info("Entro al metodo deleteByIdNotification del controlador ");
+        NotificationDto notificationDelete = this.notificationService.deleteByIdNotification(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(notificationDelete);
     }
 }

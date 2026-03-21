@@ -10,7 +10,7 @@ public interface NotificationService {
 
     NotificationDto getByIdNotification(Long id);
 
-    NotificationDto createNotification(NotificationDto notificationDto)
+    NotificationDto createNotification(NotificationDto notificationDto);
 
     NotificationDto deleteByIdNotification(Long id);
 
