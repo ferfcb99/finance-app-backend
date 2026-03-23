@@ -41,6 +41,13 @@ public class AccountControllerImpl implements AccountController{
     @Override
     @PostMapping(value = "/create", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDto> create(@RequestBody AccountDto accountDto) {
-        return null;
+
+        AccountDto accountSaved = this.accountService.create(accountDto);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(accountSaved);
     }
+
+
+
 }

@@ -3,10 +3,12 @@ package com.finance.financesystem.service.impl;
 import com.finance.financesystem.dto.AccountDto;
 import com.finance.financesystem.dto.UserSystemDto;
 import com.finance.financesystem.entity.Account;
+import com.finance.financesystem.entity.UserSystem;
 import com.finance.financesystem.repository.AccountRepository;
 import com.finance.financesystem.service.AccountService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +82,36 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public AccountDto create(AccountDto accountDto) {
-        return null;
+
+        UserSystem userSystem = new UserSystem(
+                null,
+                accountDto.getUserSystemDto().getName(),
+                accountDto.getUserSystemDto().getEmail(),
+                accountDto.getUserSystemDto().getPassword(),
+                accountDto.getUserSystemDto().getCurrency(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                accountDto.getUserSystemDto().getStatus(),
+                accountDto.getUserSystemDto().getLastLogin()
+        );
+
+        Account account = new Account(
+                accountDto.getId(),
+                accountDto.getName(),
+                accountDto.getType(),
+                accountDto.getBalace(),
+                accountDto.getCurrency(),
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                accountDto.getStatus(),
+                accountDto.getDescription(),
+                userSystem
+        );
+
+        Account savedAccount = this.accountRepository.save(account);
+        accountDto.setId(savedAccount.getId());
+
+        return accountDto;
     }
 }
 

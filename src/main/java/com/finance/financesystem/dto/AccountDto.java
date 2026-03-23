@@ -8,6 +8,8 @@ public class AccountDto {
 
     private String type;
 
+    private Double balace;
+
     private String currency;
 
     private String status;
@@ -20,7 +22,7 @@ public class AccountDto {
     public AccountDto() {
     }
 
-    public AccountDto(Long id, String name, String type, String currency, String status, String description,
+    public AccountDto(Long id, String name, String type, Double balace, String currency, String status, String description,
                       UserSystemDto userSystemDto) {
         this.id = id;
         this.name = name;
@@ -87,12 +89,21 @@ public class AccountDto {
         this.userSystemDto = userSystemDto;
     }
 
+    public Double getBalace() {
+        return balace;
+    }
+
+    public void setBalace(Double balace) {
+        this.balace = balace;
+    }
+
     @Override
     public String toString() {
         return "AccountDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
+                ", balace=" + balace +
                 ", currency='" + currency + '\'' +
                 ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
