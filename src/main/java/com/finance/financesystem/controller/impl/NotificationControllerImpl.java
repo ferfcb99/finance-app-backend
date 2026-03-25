@@ -43,7 +43,7 @@ public class NotificationControllerImpl implements NotificationController{
         NotificationDto notificationSave = this.notificationService.createNotification(notificationDto);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(notificationDto);
+                .body(notificationSave);
     }
 
 }
