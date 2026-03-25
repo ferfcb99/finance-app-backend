@@ -19,7 +19,7 @@ public class Account {
     private String type;
 
     @Column(name = "balance")
-    private Double balace;
+    private Double balance;
 
     @Column(name = "currency")
     private String currency;
@@ -36,18 +36,18 @@ public class Account {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private UserSystem userSystem;
 
     public Account() {}
 
-    public Account(Long id, String name, String type, Double balace, String currency, LocalDateTime createdAt,
+    public Account(Long id, String name, String type, Double balance, String currency, LocalDateTime createdAt,
                    LocalDateTime updatedAt, String status, String description, UserSystem userSystem) {
         this.id = id;
         this.name = name;
         this.type = type;
-        this.balace = balace;
+        this.balance = balance;
         this.currency = currency;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -80,12 +80,12 @@ public class Account {
         this.type = type;
     }
 
-    public Double getBalace() {
-        return balace;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setBalace(Double balace) {
-        this.balace = balace;
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
     public String getCurrency() {
@@ -142,7 +142,7 @@ public class Account {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", balace=" + balace +
+                ", balance=" + balance +
                 ", currency='" + currency + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

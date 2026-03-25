@@ -7,11 +7,7 @@ import java.util.List;
 
 public interface BudgetController {
 
-    ResponseEntity<List<BudgetDto>> getAllBudget();
 
-    ResponseEntity<BudgetDto> getByIdBudget(Long id);
-
-    ResponseEntity<BudgetDto> createBudget(BudgetDto budgetDto);
 
 }
 

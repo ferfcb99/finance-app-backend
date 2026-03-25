@@ -8,7 +8,7 @@ public class AccountDto {
 
     private String type;
 
-    private Double balace;
+    private Double balance;
 
     private String currency;
 
@@ -22,13 +22,13 @@ public class AccountDto {
     public AccountDto() {
     }
 
-    public AccountDto(Long id, String name, String type, Double balace, String currency, String status, String description,
+    public AccountDto(Long id, String name, String type, Double balance, String currency, String status, String description,
                       UserSystemDto userSystemDto) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.currency = currency;
-        this.balace = balace;
+        this.balance = balance;
         this.status = status;
         this.description = description;
         this.userSystemDto = userSystemDto;
@@ -90,12 +90,12 @@ public class AccountDto {
         this.userSystemDto = userSystemDto;
     }
 
-    public Double getBalace() {
-        return balace;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setBalace(Double balace) {
-        this.balace = balace;
+    public void setBalance(Double balance) {
+        this.balance = balance;
     }
 
 
@@ -105,7 +105,7 @@ public class AccountDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", balace=" + balace +
+                ", balance=" + balance +
                 ", currency='" + currency + '\'' +
                 ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
