@@ -84,7 +84,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto create(AccountDto accountDto) {
 
         UserSystem userSystem = new UserSystem(
-                null,
+                accountDto.getUserSystemDto().getId(),
                 accountDto.getUserSystemDto().getName(),
                 accountDto.getUserSystemDto().getEmail(),
                 accountDto.getUserSystemDto().getPassword(),
@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
         );
 
         Account account = new Account(
-                accountDto.getId(),
+                null,
                 accountDto.getName(),
                 accountDto.getType(),
                 accountDto.getBalace(),

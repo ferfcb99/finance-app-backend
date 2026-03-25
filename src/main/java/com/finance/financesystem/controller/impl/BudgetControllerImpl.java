@@ -3,6 +3,7 @@ package com.finance.financesystem.controller.impl;
 import com.finance.financesystem.controller.BudgetController;
 import com.finance.financesystem.dto.BudgetDto;
 import com.finance.financesystem.service.BudgetService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,21 +22,30 @@ public class BudgetControllerImpl implements BudgetController{
     @Override
     @GetMapping(value = "/get-all-budget", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BudgetDto>> getAllBudget(){
-        return null;
+        List<BudgetDto> budgetDtoList = this.budgetService.getAllBudget();
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(budgetDtoList);
     }
 
 
     @Override
     @GetMapping(value = "/get-by-id-budget/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BudgetDto> getByIdBudget(@PathVariable("id") Long id) {
-        return null;
+        BudgetDto budgetDto = this.budgetService.getByIdBudget(id);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(budgetDto);
     }
 
 
     @Override
     @PostMapping(value = "/create-budget", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BudgetDto> createBudget(@RequestBody BudgetDto budgetDto) {
-        return null;
+        BudgetDto bugdgetSave = this.budgetService.createBudget(budgetDto);
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(budgetDto);
     }
 
 }

@@ -28,6 +28,18 @@ public class Notification {
     @Column(name = "status")
     private String status;
 
+    public Notification(){
+    }
+
+    public Notification(Long id, String message, String type, Boolean isRead, LocalDateTime createdAt, String status) {
+        this.id = id;
+        this.message = message;
+        this.type = type;
+        this.isRead = isRead;
+        this.createdAt = createdAt;
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
