@@ -6,9 +6,5 @@ import java.util.List;
 
 public interface UserSystemService {
 
-    List<UserSystemDto> getAllUserSystem();
 
-    UserSystemDto getByIdUserSystem(Long id);
-
-    UserSystemDto createUserSystem(UserSystemDto userSystemDto);
 }

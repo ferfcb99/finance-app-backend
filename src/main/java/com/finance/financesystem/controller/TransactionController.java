@@ -7,9 +7,5 @@ import java.util.List;
 
 public interface TransactionController {
 
-    ResponseEntity<List<TransactionDto>> getAllTransaction();
 
-    ResponseEntity<TransactionDto> getByIdTransaction(Long id);
-
-    ResponseEntity<TransactionDto> createTransaction(TransactionDto transactionDto);
 }

@@ -8,9 +8,5 @@ import java.util.List;
 
 public interface UserSystemController {
 
-    ResponseEntity<List<UserSystemDto>> getAllUserSystem();
 
-    ResponseEntity<UserSystemDto> getByIdUserSystem(Long id);
-
-    ResponseEntity<UserSystemDto> createBudget(UserSystemDto userSystemDto);
 }

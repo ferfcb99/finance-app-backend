@@ -6,6 +6,9 @@ import com.finance.financesystem.entity.Account;
 import com.finance.financesystem.entity.UserSystem;
 import com.finance.financesystem.repository.AccountRepository;
 import com.finance.financesystem.service.AccountService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -15,34 +18,40 @@ import java.util.List;
 @Service
 public class AccountServiceImpl implements AccountService {
 
+    Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
+
     private final AccountRepository accountRepository;
 
-    private AccountServiceImpl(AccountRepository accountRepository){
+    public AccountServiceImpl(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
     @Override
     public List<AccountDto> getAll() {
-        List<Account> accountList = this.accountRepository.findAll(); // sleect * from aacount
+        logger.info("Entro al metodo getAll del servicio");
+        List<Account> accounts = accountRepository.findAll();
         List<AccountDto> accountDtoList = new ArrayList<>();
 
-        for(Account accountTmp : accountList){
+        for(Account account : accounts) {
             AccountDto accountDto = new AccountDto();
-            accountDto.setId(accountTmp.getId());
-            accountDto.setName(accountTmp.getName());
-            accountDto.setType(accountTmp.getType());
-            accountDto.setCurrency(accountTmp.getCurrency());
-            accountDto.setDescription(accountTmp.getDescription());
-            accountDto.setStatus(accountTmp.getStatus());
-
             UserSystemDto userSystemDto = new UserSystemDto();
-            userSystemDto.setId(accountTmp.getUserSystem().getId());
-            userSystemDto.setName(accountTmp.getUserSystem().getName());
-            userSystemDto.setCurrency(accountTmp.getUserSystem().getCurrency());
-            userSystemDto.setEmail(accountTmp.getUserSystem().getEmail());
-            userSystemDto.setPassword(accountTmp.getUserSystem().getPassword());
-            userSystemDto.setStatus(accountTmp.getUserSystem().getStatus());
-            userSystemDto.setLastLogin(accountTmp.getUserSystem().getLastLogin());
+
+            accountDto.setId(account.getId());
+            accountDto.setName(account.getName());
+            accountDto.setType(account.getType());
+            accountDto.setBalance(account.getBalance());
+            accountDto.setCurrency(account.getCurrency());
+            accountDto.setStatus(account.getStatus());
+            accountDto.setDescription(account.getDescription());
+
+
+            userSystemDto.setId(account.getUserSystem().getId());
+            userSystemDto.setName(account.getUserSystem().getName());
+            userSystemDto.setEmail(account.getUserSystem().getEmail());
+            userSystemDto.setPassword(account.getUserSystem().getPassword());
+            userSystemDto.setCurrency(account.getUserSystem().getCurrency());
+            userSystemDto.setStatus(account.getUserSystem().getStatus());
+            userSystemDto.setLastLogin(account.getUserSystem().getLastLogin());
 
             accountDto.setUserSystemDto(userSystemDto);
 
@@ -51,68 +60,110 @@ public class AccountServiceImpl implements AccountService {
         }
 
         return accountDtoList;
+
     }
 
     @Override
-    // select * form account where id = ?
     public AccountDto getById(Long id) {
-        Account accountTmp = this.accountRepository.findById(id).get();
+        logger.info("Entro al metodo getById del servicio");
+        Account accountById = this.accountRepository.findById(id).get();
 
         AccountDto accountDto = new AccountDto();
-        accountDto.setId(accountTmp.getId());
-        accountDto.setName(accountTmp.getName());
-        accountDto.setType(accountTmp.getType());
-        accountDto.setCurrency(accountTmp.getCurrency());
-        accountDto.setDescription(accountTmp.getDescription());
-        accountDto.setStatus(accountTmp.getStatus());
-
         UserSystemDto userSystemDto = new UserSystemDto();
-        userSystemDto.setId(accountTmp.getUserSystem().getId());
-        userSystemDto.setName(accountTmp.getUserSystem().getName());
-        userSystemDto.setCurrency(accountTmp.getUserSystem().getCurrency());
-        userSystemDto.setEmail(accountTmp.getUserSystem().getEmail());
-        userSystemDto.setPassword(accountTmp.getUserSystem().getPassword());
-        userSystemDto.setStatus(accountTmp.getUserSystem().getStatus());
-        userSystemDto.setLastLogin(accountTmp.getUserSystem().getLastLogin());
+
+        accountDto.setId(accountById.getId());
+        accountDto.setName(accountById.getName());
+        accountDto.setType(accountById.getType());
+        accountDto.setBalance(accountById.getBalance());
+        accountDto.setCurrency(accountById.getCurrency());
+        accountDto.setStatus(accountById.getStatus());
+        accountDto.setDescription(accountById.getDescription());
+
+
+        userSystemDto.setId(accountById.getUserSystem().getId());
+        userSystemDto.setName(accountById.getUserSystem().getName());
+        userSystemDto.setEmail(accountById.getUserSystem().getEmail());
+        userSystemDto.setPassword(accountById.getUserSystem().getPassword());
+        userSystemDto.setCurrency(accountById.getUserSystem().getCurrency());
+        userSystemDto.setStatus(accountById.getUserSystem().getStatus());
+        userSystemDto.setLastLogin(accountById.getUserSystem().getLastLogin());
+
+        accountDto.setUserSystemDto(userSystemDto);
+
+        return accountDto;
+
+    }
+
+    @Override
+    public AccountDto create(AccountDto accountDto) {
+        logger.info("Entro al metodo create del servicio");
+        Account accountToCreate = new Account();
+        accountToCreate.setId(null);
+        accountToCreate.setName(accountDto.getName());
+        accountToCreate.setType(accountDto.getType());
+        accountToCreate.setBalance(accountDto.getBalance());
+        accountToCreate.setCurrency(accountDto.getCurrency());
+
+        accountToCreate.setCreatedAt(LocalDateTime.now());
+        accountToCreate.setUpdatedAt(LocalDateTime.now());
+
+        accountToCreate.setStatus(accountDto.getStatus());
+        accountToCreate.setDescription(accountDto.getDescription());
+
+        UserSystem userSystem = new UserSystem();
+        userSystem.setId(accountDto.getUserSystemDto().getId());
+        userSystem.setName(accountDto.getUserSystemDto().getName());
+        userSystem.setEmail(accountDto.getUserSystemDto().getEmail());
+        userSystem.setPassword(accountDto.getUserSystemDto().getPassword());
+        userSystem.setCurrency(accountDto.getUserSystemDto().getCurrency());
+        userSystem.setCreatedAt(LocalDateTime.now());
+        userSystem.setUpdatedAt(LocalDateTime.now());
+        userSystem.setStatus(accountDto.getUserSystemDto().getStatus());
+        userSystem.setLastLogin(accountDto.getUserSystemDto().getLastLogin());
+
+        accountToCreate.setUserSystem(userSystem);
+
+        accountToCreate = this.accountRepository.save(accountToCreate);
+        accountDto.setId(accountToCreate.getId());
+
+        return accountDto;
+
+    }
+
+    @Override
+    public AccountDto deleteById(Long id) {
+        logger.info("Entro al metodo deleteById del servicio");
+        Account accountDeleted = this.accountRepository.findById(id).get();
+
+        this.accountRepository.deleteById(id);
+
+        AccountDto accountDto = new AccountDto();
+        UserSystemDto userSystemDto = new UserSystemDto();
+
+        accountDto.setId(accountDeleted.getId());
+        accountDto.setName(accountDeleted.getName());
+        accountDto.setType(accountDeleted.getType());
+        accountDto.setBalance(accountDeleted.getBalance());
+        accountDto.setCurrency(accountDeleted.getCurrency());
+        accountDto.setStatus(accountDeleted.getStatus());
+        accountDto.setDescription(accountDeleted.getDescription());
+
+
+
+        userSystemDto.setId(accountDeleted.getUserSystem().getId());
+        userSystemDto.setName(accountDeleted.getUserSystem().getName());
+        userSystemDto.setEmail(accountDeleted.getUserSystem().getEmail());
+        userSystemDto.setPassword(accountDeleted.getUserSystem().getPassword());
+        userSystemDto.setCurrency(accountDeleted.getUserSystem().getCurrency());
+        userSystemDto.setStatus(accountDeleted.getUserSystem().getStatus());
+        userSystemDto.setLastLogin(accountDeleted.getUserSystem().getLastLogin());
 
         accountDto.setUserSystemDto(userSystemDto);
 
         return accountDto;
     }
 
-    @Override
-    public AccountDto create(AccountDto accountDto) {
 
-        UserSystem userSystem = new UserSystem(
-                accountDto.getUserSystemDto().getId(),
-                accountDto.getUserSystemDto().getName(),
-                accountDto.getUserSystemDto().getEmail(),
-                accountDto.getUserSystemDto().getPassword(),
-                accountDto.getUserSystemDto().getCurrency(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                accountDto.getUserSystemDto().getStatus(),
-                accountDto.getUserSystemDto().getLastLogin()
-        );
-
-        Account account = new Account(
-                null,
-                accountDto.getName(),
-                accountDto.getType(),
-                accountDto.getBalace(),
-                accountDto.getCurrency(),
-                LocalDateTime.now(),
-                LocalDateTime.now(),
-                accountDto.getStatus(),
-                accountDto.getDescription(),
-                userSystem
-        );
-
-        Account savedAccount = this.accountRepository.save(account);
-        accountDto.setId(savedAccount.getId());
-
-        return accountDto;
-    }
 }
 
 

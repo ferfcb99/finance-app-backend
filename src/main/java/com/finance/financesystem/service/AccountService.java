@@ -10,6 +10,8 @@ public interface AccountService {
 
     AccountDto getById(Long id);
 
+    AccountDto deleteById(Long id);
+
     AccountDto create(AccountDto accountDto);
 
 }

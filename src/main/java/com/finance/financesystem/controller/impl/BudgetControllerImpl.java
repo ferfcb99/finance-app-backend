@@ -14,38 +14,4 @@ import java.util.List;
 @RequestMapping(path = "/v1/budget")
 public class BudgetControllerImpl implements BudgetController{
 
-    private final BudgetService budgetService;
-
-    public BudgetControllerImpl(BudgetService budgetService){
-        this.budgetService = budgetService;
-    }
-    @Override
-    @GetMapping(value = "/get-all-budget", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BudgetDto>> getAllBudget(){
-        List<BudgetDto> budgetDtoList = this.budgetService.getAllBudget();
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(budgetDtoList);
-    }
-
-
-    @Override
-    @GetMapping(value = "/get-by-id-budget/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BudgetDto> getByIdBudget(@PathVariable("id") Long id) {
-        BudgetDto budgetDto = this.budgetService.getByIdBudget(id);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(budgetDto);
-    }
-
-
-    @Override
-    @PostMapping(value = "/create-budget", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BudgetDto> createBudget(@RequestBody BudgetDto budgetDto) {
-        BudgetDto bugdgetSave = this.budgetService.createBudget(budgetDto);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(bugdgetSave);
-    }
-
 }

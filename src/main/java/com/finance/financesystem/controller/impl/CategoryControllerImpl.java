@@ -16,36 +16,5 @@ import java.util.List;
 @RequestMapping(path = "/v1/category")
 public class CategoryControllerImpl implements CategoryController {
 
-    private final CategoryService categoryService;
-
-    public CategoryControllerImpl(CategoryService categoryService) {
-        this.categoryService = categoryService;
-    }
-
-    @Override
-    @GetMapping(value = "/get-all-category", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CategoryDto>> getAllCategory() {
-        List<CategoryDto> categoryDtoList = this.categoryService.getAllCategory();
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(categoryDtoList);
-    }
-
-    @Override
-    @GetMapping(value = "/get-by-id-category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CategoryDto> getByIdCategory(@PathVariable("id") Long id) {
-        CategoryDto categoryDto = this.categoryService.getByIdCategory(id);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(categoryDto);
-    }
-    @Override
-    @PostMapping(value = "/create-category", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CategoryDto> createCategory(@RequestBody CategoryDto categoryDto) {
-        CategoryDto categorySave = this.categoryService.createCategory(categoryDto);
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(categorySave);
-    }
 }
 
