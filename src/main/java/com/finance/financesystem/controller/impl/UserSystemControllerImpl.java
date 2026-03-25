@@ -42,7 +42,7 @@ public class UserSystemControllerImpl implements UserSystemController{
         UserSystemDto userSystemSvae = this.userSystemService.createUserSystem(userSystemDto);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(userSystemDto);
+                .body(userSystemSvae);
 
     }
 

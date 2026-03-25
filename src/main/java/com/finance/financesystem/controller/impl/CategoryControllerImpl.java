@@ -45,7 +45,7 @@ public class CategoryControllerImpl implements CategoryController {
         CategoryDto categorySave = this.categoryService.createCategory(categoryDto);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(categoryDto);
+                .body(categorySave);
     }
 }
 

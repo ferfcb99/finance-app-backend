@@ -45,7 +45,7 @@ public class BudgetControllerImpl implements BudgetController{
         BudgetDto bugdgetSave = this.budgetService.createBudget(budgetDto);
 
         return ResponseEntity.status(HttpStatus.OK)
-                .body(budgetDto);
+                .body(bugdgetSave);
     }
 
 }
