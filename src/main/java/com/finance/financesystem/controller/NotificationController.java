@@ -7,5 +7,14 @@ import java.util.List;
 
 public interface NotificationController {
 
+    ResponseEntity<List<NotificationDto>> getAllNotification();
+
+    ResponseEntity<NotificationDto> getByIdNotification(Long id);
+
+    ResponseEntity<NotificationDto> createNotification(NotificationDto notificationDto);
+
+    ResponseEntity<NotificationDto> deleteByIdNotification(Long id);
+
+
 
 }
