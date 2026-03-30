@@ -34,11 +34,11 @@ public class Budget {
     @Column(name = "alert_threshold")
     private Double alertThreshold;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH})
     @JoinColumn(name = "user_id")
     private UserSystem userSystem;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH})
     @JoinColumn(name = "category_id")
     private Category category;
 
