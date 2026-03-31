@@ -4,6 +4,7 @@ import com.finance.financesystem.dto.AccountDto;
 import com.finance.financesystem.dto.UserSystemDto;
 import com.finance.financesystem.entity.Account;
 import com.finance.financesystem.entity.UserSystem;
+import com.finance.financesystem.mapper.AccountMapper;
 import com.finance.financesystem.repository.AccountRepository;
 import com.finance.financesystem.service.AccountService;
 
@@ -33,30 +34,8 @@ public class AccountServiceImpl implements AccountService {
         List<AccountDto> accountDtoList = new ArrayList<>();
 
         for(Account account : accounts) {
-            AccountDto accountDto = new AccountDto();
-            UserSystemDto userSystemDto = new UserSystemDto();
-
-            accountDto.setId(account.getId());
-            accountDto.setName(account.getName());
-            accountDto.setType(account.getType());
-            accountDto.setBalance(account.getBalance());
-            accountDto.setCurrency(account.getCurrency());
-            accountDto.setStatus(account.getStatus());
-            accountDto.setDescription(account.getDescription());
-
-
-            userSystemDto.setId(account.getUserSystem().getId());
-            userSystemDto.setName(account.getUserSystem().getName());
-            userSystemDto.setEmail(account.getUserSystem().getEmail());
-            userSystemDto.setPassword(account.getUserSystem().getPassword());
-            userSystemDto.setCurrency(account.getUserSystem().getCurrency());
-            userSystemDto.setStatus(account.getUserSystem().getStatus());
-            userSystemDto.setLastLogin(account.getUserSystem().getLastLogin());
-
-            accountDto.setUserSystemDto(userSystemDto);
-
+            AccountDto accountDto = AccountMapper.toDto(account);
             accountDtoList.add(accountDto);
-
         }
 
         return accountDtoList;
@@ -97,31 +76,8 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto create(AccountDto accountDto) {
         logger.info("Entro al metodo create del servicio");
-        Account accountToCreate = new Account();
-        accountToCreate.setId(null);
-        accountToCreate.setName(accountDto.getName());
-        accountToCreate.setType(accountDto.getType());
-        accountToCreate.setBalance(accountDto.getBalance());
-        accountToCreate.setCurrency(accountDto.getCurrency());
 
-        accountToCreate.setCreatedAt(LocalDateTime.now());
-        accountToCreate.setUpdatedAt(LocalDateTime.now());
-
-        accountToCreate.setStatus(accountDto.getStatus());
-        accountToCreate.setDescription(accountDto.getDescription());
-
-        UserSystem userSystem = new UserSystem();
-        userSystem.setId(accountDto.getUserSystemDto().getId());
-        userSystem.setName(accountDto.getUserSystemDto().getName());
-        userSystem.setEmail(accountDto.getUserSystemDto().getEmail());
-        userSystem.setPassword(accountDto.getUserSystemDto().getPassword());
-        userSystem.setCurrency(accountDto.getUserSystemDto().getCurrency());
-        userSystem.setCreatedAt(LocalDateTime.now());
-        userSystem.setUpdatedAt(LocalDateTime.now());
-        userSystem.setStatus(accountDto.getUserSystemDto().getStatus());
-        userSystem.setLastLogin(accountDto.getUserSystemDto().getLastLogin());
-
-        accountToCreate.setUserSystem(userSystem);
+        Account accountToCreate = AccountMapper.toEntity(accountDto);
 
         accountToCreate = this.accountRepository.save(accountToCreate);
         accountDto.setId(accountToCreate.getId());

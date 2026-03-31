@@ -60,7 +60,7 @@ public class NotificationControllerImpl implements NotificationController{
 
     // metodo para eliminar datos por id
     @Override
-    @DeleteMapping(value = "/delete-by-id-notification/{id)", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete-by-id-notification/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<NotificationDto> deleteByIdNotification(@PathVariable Long id) {
         logger.info("Entro al metodo deleteByIdNotification del controlador ");
         NotificationDto notificationDelete = this.notificationService.deleteByIdNotification(id);

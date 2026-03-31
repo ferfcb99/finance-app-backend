@@ -39,7 +39,7 @@ public class UserSystemServiceImpl implements UserSystemService {
             userSystemDto.setEmail(userSystem.getEmail());
             userSystemDto.setPassword(userSystem.getPassword());
             userSystemDto.setCurrency(userSystem.getCurrency());
-            userSystemDto.setStatus(userSystemDto.getStatus());
+            userSystemDto.setStatus(userSystem.getStatus());
             userSystemDto.setLastLogin(userSystem.getLastLogin());
 
             userSystemDtoList.add(userSystemDto);
@@ -74,12 +74,13 @@ public class UserSystemServiceImpl implements UserSystemService {
         UserSystem userSystemCreate = new UserSystem();
 
         userSystemCreate.setId(null);
-        userSystemCreate.setName(userSystemCreate.getName());
-        userSystemCreate.setEmail(userSystemCreate.getEmail());
-        userSystemCreate.setPassword(userSystemCreate.getPassword());
-        userSystemCreate.setCurrency(userSystemCreate.getCurrency());
-        userSystemCreate.setStatus(userSystemCreate.getStatus());
-        userSystemCreate.setLastLogin(userSystemCreate.getLastLogin());
+        userSystemCreate.setName(userSystemDto.getName());
+        userSystemCreate.setEmail(userSystemDto.getEmail());
+        userSystemCreate.setPassword(userSystemDto.getPassword());
+        userSystemCreate.setCurrency(userSystemDto.getCurrency());
+        userSystemCreate.setStatus(userSystemDto.getStatus());
+        userSystemCreate.setLastLogin(userSystemDto.getLastLogin());
+
 
         userSystemCreate = this.userSystemRepository.save(userSystemCreate);
         userSystemDto.setId(userSystemCreate.getId());

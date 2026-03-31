@@ -68,11 +68,16 @@ public class NotificationServiceImpl implements NotificationService {
         logger.info("Entro al metodo createNotification del servicio");
 
         Notification notificationCreate = new Notification();
-        notificationCreate.setId(null);
+        notificationCreate.setId(notificationDto.getId());
         notificationCreate.setMessage(notificationDto.getMessage());
         notificationCreate.setType(notificationDto.getType());
         notificationCreate.setRead(notificationDto.getRead());
         notificationCreate.setStatus(notificationDto.getStatus());
+        notificationCreate.setCreatedAt(LocalDateTime.now());
+
+        notificationCreate = this.notificationRepository.save(notificationCreate); // crear y actualizar
+
+        notificationDto.setId(notificationCreate.getId());
 
         return notificationDto;
     }
@@ -86,10 +91,10 @@ public class NotificationServiceImpl implements NotificationService {
         NotificationDto notificationDto = new NotificationDto();
 
         notificationDto.setId(notificationDeleted.getId());
-        notificationDto.setMessage(notificationDto.getMessage());
-        notificationDto.setType(notificationDto.getType());
-        notificationDto.setRead(notificationDto.getRead());
-        notificationDto.setStatus(notificationDto.getStatus());
+        notificationDto.setMessage(notificationDeleted.getMessage());
+        notificationDto.setType(notificationDeleted.getType());
+        notificationDto.setRead(notificationDeleted.getRead());
+        notificationDto.setStatus(notificationDeleted.getStatus());
 
         return notificationDto;
     }
