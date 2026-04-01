@@ -5,6 +5,7 @@ import com.finance.financesystem.dto.UserSystemDto;
 import com.finance.financesystem.entity.Account;
 import com.finance.financesystem.entity.UserSystem;
 import com.finance.financesystem.mapper.AccountMapper;
+import com.finance.financesystem.mapper.CategoryMapper;
 import com.finance.financesystem.repository.AccountRepository;
 import com.finance.financesystem.service.AccountService;
 
@@ -31,14 +32,8 @@ public class  AccountServiceImpl implements AccountService {
     public List<AccountDto> getAll() {
         logger.info("Entro al metodo getAll del servicio");
         List<Account> accounts = accountRepository.findAll();
-        List<AccountDto> accountDtoList = new ArrayList<>();
 
-        for(Account account : accounts) {
-            AccountDto accountDto = AccountMapper.toDto(account);
-            accountDtoList.add(accountDto);
-        }
-
-        return accountDtoList;
+        return AccountMapper.toListDto(accounts);
 
     }
 
@@ -47,29 +42,7 @@ public class  AccountServiceImpl implements AccountService {
         logger.info("Entro al metodo getById del servicio");
         Account accountById = this.accountRepository.findById(id).get();
 
-        AccountDto accountDto = new AccountDto();
-        UserSystemDto userSystemDto = new UserSystemDto();
-
-        accountDto.setId(accountById.getId());
-        accountDto.setName(accountById.getName());
-        accountDto.setType(accountById.getType());
-        accountDto.setBalance(accountById.getBalance());
-        accountDto.setCurrency(accountById.getCurrency());
-        accountDto.setStatus(accountById.getStatus());
-        accountDto.setDescription(accountById.getDescription());
-
-
-        userSystemDto.setId(accountById.getUserSystem().getId());
-        userSystemDto.setName(accountById.getUserSystem().getName());
-        userSystemDto.setEmail(accountById.getUserSystem().getEmail());
-        userSystemDto.setPassword(accountById.getUserSystem().getPassword());
-        userSystemDto.setCurrency(accountById.getUserSystem().getCurrency());
-        userSystemDto.setStatus(accountById.getUserSystem().getStatus());
-        userSystemDto.setLastLogin(accountById.getUserSystem().getLastLogin());
-
-        accountDto.setUserSystemDto(userSystemDto);
-
-        return accountDto;
+        return AccountMapper.toDto(accountById);
 
     }
 
@@ -82,7 +55,7 @@ public class  AccountServiceImpl implements AccountService {
         accountToCreate = this.accountRepository.save(accountToCreate);
         accountDto.setId(accountToCreate.getId());
 
-        return accountDto;
+        return AccountMapper.toDto(accountToCreate);
 
     }
 
@@ -93,30 +66,8 @@ public class  AccountServiceImpl implements AccountService {
 
         this.accountRepository.deleteById(id);
 
-        AccountDto accountDto = new AccountDto();
-        UserSystemDto userSystemDto = new UserSystemDto();
 
-        accountDto.setId(accountDeleted.getId());
-        accountDto.setName(accountDeleted.getName());
-        accountDto.setType(accountDeleted.getType());
-        accountDto.setBalance(accountDeleted.getBalance());
-        accountDto.setCurrency(accountDeleted.getCurrency());
-        accountDto.setStatus(accountDeleted.getStatus());
-        accountDto.setDescription(accountDeleted.getDescription());
-
-
-
-        userSystemDto.setId(accountDeleted.getUserSystem().getId());
-        userSystemDto.setName(accountDeleted.getUserSystem().getName());
-        userSystemDto.setEmail(accountDeleted.getUserSystem().getEmail());
-        userSystemDto.setPassword(accountDeleted.getUserSystem().getPassword());
-        userSystemDto.setCurrency(accountDeleted.getUserSystem().getCurrency());
-        userSystemDto.setStatus(accountDeleted.getUserSystem().getStatus());
-        userSystemDto.setLastLogin(accountDeleted.getUserSystem().getLastLogin());
-
-        accountDto.setUserSystemDto(userSystemDto);
-
-        return accountDto;
+        return AccountMapper.toDto(accountDeleted);
     }
 
 
