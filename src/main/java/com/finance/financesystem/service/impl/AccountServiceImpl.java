@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class AccountServiceImpl implements AccountService {
+public class  AccountServiceImpl implements AccountService {
 
     Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
 

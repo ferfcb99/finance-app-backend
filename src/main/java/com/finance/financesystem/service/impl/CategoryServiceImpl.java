@@ -39,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
             categoryDto.setType(category1.getType());
             categoryDto.setColor(category1.getColor());
             categoryDto.setIcon(category1.getIcon());
+            categoryDto.setDescription(category1.getDescription());
             categoryDto.setStatus(category1.getStatus());
 
             categoryDtoList.add(categoryDto);
@@ -59,6 +60,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDto.setType(categoryById.getType());
         categoryDto.setColor(categoryById.getColor());
         categoryDto.setIcon(categoryById.getIcon());
+        categoryDto.setDescription(categoryById.getDescription());
         categoryDto.setStatus(categoryById.getStatus());
 
 
@@ -75,7 +77,14 @@ public class CategoryServiceImpl implements CategoryService {
         categoryCreate.setName(categoryDto.getName());
         categoryCreate.setType(categoryDto.getType());
         categoryCreate.setDescription(categoryDto.getDescription());
+        categoryCreate.setColor(categoryDto.getColor());
+        categoryCreate.setIcon(categoryDto.getIcon());
+        categoryCreate.setCreatedAt(LocalDateTime.now());
+        categoryCreate.setUpdatedAt(LocalDateTime.now());
         categoryCreate.setStatus(categoryDto.getStatus());
+
+        categoryCreate = this.categoryRepository.save(categoryCreate);
+        categoryDto.setId(categoryCreate.getId());
 
         return categoryDto;
     }
@@ -94,6 +103,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryDto.setType(categoryDeleted.getType());
         categoryDto.setColor(categoryDeleted.getColor());
         categoryDto.setIcon(categoryDeleted.getIcon());
+        categoryDto.setDescription(categoryDeleted.getDescription());
         categoryDto.setStatus(categoryDeleted.getStatus());
 
         return categoryDto;
