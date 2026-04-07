@@ -3,6 +3,9 @@ package com.finance.financesystem.mapper;
 import com.finance.financesystem.dto.NotificationDto;
 import com.finance.financesystem.entity.Notification;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class NotificationMapper {
     private NotificationMapper(){
     }
@@ -28,6 +31,21 @@ public final class NotificationMapper {
         notificationDto.setStatus(notification.getStatus());
 
         return notificationDto;
+    }
 
+    public static List<NotificationDto> toListDto(List<Notification> notifications){
+        List<NotificationDto> notificationDtoList = new ArrayList<>();
+        for(Notification notification : notifications){
+            notificationDtoList.add(toDto(notification));
+        }
+        return notificationDtoList;
+    }
+
+    public static List<Notification> toListEntity(List<NotificationDto> notificationDtoList){
+        List<Notification> notifications = new ArrayList<>();
+        for(NotificationDto notificationDto : notificationDtoList){
+            notifications.add(toEntity(notificationDto));
+        }
+        return notifications;
     }
 }

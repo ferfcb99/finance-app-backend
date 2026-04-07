@@ -29,13 +29,8 @@ public class NotificationServiceImpl implements NotificationService {
     public List<NotificationDto> getAllNotification() {
         logger.info("Entro el metodo getAllNotification del servidor ");
         List<Notification> notifications = this.notificationRepository.findAll();
-        List<NotificationDto> notificationDtoList = new ArrayList<>();
 
-        for(Notification notification : notifications){
-            NotificationDto notificationDto = NotificationMapper.toDto(notification);
-            notificationDtoList.add(notificationDto);
-        }
-        return notificationDtoList;
+        return NotificationMapper.toListDto(notifications);
     }
 
     @Override
@@ -43,34 +38,22 @@ public class NotificationServiceImpl implements NotificationService {
         logger.info("Entro el metodo getByIdNotification del servidor");
         Notification notificationById = this.notificationRepository.findById(id).get();
 
-        NotificationDto notificationDto = new NotificationDto();
-
-        notificationDto.setId(notificationById.getId());
-        notificationDto.setMessage(notificationById.getMessage());
-        notificationDto.setType(notificationById.getType());
-        notificationDto.setRead(notificationById.getRead());
-        notificationDto.setStatus(notificationById.getStatus());
-
-        return notificationDto;
+        return NotificationMapper.toDto(notificationById);
     }
 
     @Override
     public NotificationDto createNotification(NotificationDto notificationDto) {
         logger.info("Entro al metodo createNotification del servicio");
 
-        Notification notificationCreate = new Notification();
-        notificationCreate.setId(notificationDto.getId());
-        notificationCreate.setMessage(notificationDto.getMessage());
-        notificationCreate.setType(notificationDto.getType());
-        notificationCreate.setRead(notificationDto.getRead());
-        notificationCreate.setStatus(notificationDto.getStatus());
+        Notification notificationCreate = NotificationMapper.toEntity(notificationDto);
+        notificationCreate.setId(null);
         notificationCreate.setCreatedAt(LocalDateTime.now());
 
         notificationCreate = this.notificationRepository.save(notificationCreate); // crear y actualizar
 
         notificationDto.setId(notificationCreate.getId());
 
-        return notificationDto;
+        return NotificationMapper.toDto(notificationCreate);
     }
 
     @Override
@@ -79,14 +62,7 @@ public class NotificationServiceImpl implements NotificationService {
         Notification notificationDeleted = this.notificationRepository.findById(id).get();
 
         this.notificationRepository.deleteById(id);
-        NotificationDto notificationDto = new NotificationDto();
 
-        notificationDto.setId(notificationDeleted.getId());
-        notificationDto.setMessage(notificationDeleted.getMessage());
-        notificationDto.setType(notificationDeleted.getType());
-        notificationDto.setRead(notificationDeleted.getRead());
-        notificationDto.setStatus(notificationDeleted.getStatus());
-
-        return notificationDto;
+        return NotificationMapper.toDto(notificationDeleted);
     }
 }
