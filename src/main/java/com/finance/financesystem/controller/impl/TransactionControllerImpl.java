@@ -2,6 +2,7 @@ package com.finance.financesystem.controller.impl;
 
 import com.finance.financesystem.controller.TransactionController;
 import com.finance.financesystem.dto.TransactionDto;
+import com.finance.financesystem.dto.transactionrequest.TransactionRequest;
 import com.finance.financesystem.entity.Transaction;
 import com.finance.financesystem.service.TransactionService;
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,25 +25,20 @@ public class TransactionControllerImpl implements TransactionController {
         this.transactionService = transactionService;
     }
 
-
     @Override
-    public ResponseEntity<List<TransactionDto>> getAllTransaction() {
-        return null;
+    @GetMapping(path = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<TransactionRequest>> getAllTransactionRequests() {
+        List<TransactionRequest> transactionRequests = this.transactionService.getAllTransactions();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(transactionRequests);
     }
 
     @Override
-    public ResponseEntity<TransactionDto> getByIdTransaction(@PathVariable Long id) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<TransactionDto> createTransaction(TransactionDto transactionDto) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<TransactionDto> deleteByIdTransaction(Long id) {
-        return null;
+    @PostMapping(path = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> addTransaction(@RequestBody TransactionRequest transactionRequest) {
+        String responseMessage = this.transactionService.addTransaction(transactionRequest);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(responseMessage);
     }
 }
 

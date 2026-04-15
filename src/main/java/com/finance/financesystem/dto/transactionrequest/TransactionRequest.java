@@ -1,9 +1,6 @@
-package com.finance.financesystem.dto;
+package com.finance.financesystem.dto.transactionrequest;
 
-import jakarta.persistence.Column;
-import java.util.Date;
-
-public class TransactionDto {
+public class TransactionRequest {
 
     private Long id;
 
@@ -13,33 +10,25 @@ public class TransactionDto {
 
     private String description;
 
-    private Date transactionDate;
-
     private String status;
 
     private String reference;
 
-    private CategoryDto categoryDto;
+    private Long categoryId;
 
-    private AccountDto accountDto;
+    private Long accountId;
 
-    public TransactionDto(){
+    public TransactionRequest() {}
 
-    }
-
-
-
-    public TransactionDto(Long id, String type, Double amount, String description, Date transactionDate,
-                          String status, String reference, CategoryDto categoryDto, AccountDto accountDto) {
+    public TransactionRequest(Long id, String type, Double amount, String descritpion, String status, String reference, Long categoryId, Long accountId) {
         this.id = id;
         this.type = type;
         this.amount = amount;
-        this.description = description;
-        this.transactionDate = transactionDate;
+        this.description = descritpion;
         this.status = status;
         this.reference = reference;
-        this.categoryDto = categoryDto;
-        this.accountDto = accountDto;
+        this.categoryId = categoryId;
+        this.accountId = accountId;
     }
 
     public Long getId() {
@@ -74,14 +63,6 @@ public class TransactionDto {
         this.description = description;
     }
 
-    public Date getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(Date transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -98,34 +79,33 @@ public class TransactionDto {
         this.reference = reference;
     }
 
-    public CategoryDto getCategoryDto() {
-        return categoryDto;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryDto(CategoryDto categoryDto) {
-        this.categoryDto = categoryDto;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public AccountDto getAccountDto() {
-        return accountDto;
+    public Long getAccountId() {
+        return accountId;
     }
 
-    public void setAccountDto(AccountDto accountDto) {
-        this.accountDto = accountDto;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     @Override
     public String toString() {
-        return "TransactionDto{" +
+        return "TransactionRequest{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
                 ", amount=" + amount +
-                ", description='" + description + '\'' +
-                ", transactionDate=" + transactionDate +
+                ", descritpion=" + description +
                 ", status='" + status + '\'' +
                 ", reference='" + reference + '\'' +
-                ", categoryDto=" + categoryDto +
-                ", accountDto=" + accountDto +
+                ", categoryId=" + categoryId +
+                ", accountId=" + accountId +
                 '}';
     }
 }
