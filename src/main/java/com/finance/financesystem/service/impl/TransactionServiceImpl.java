@@ -1,13 +1,17 @@
 package com.finance.financesystem.service.impl;
 
 import com.finance.financesystem.dto.CategoryDto;
+import com.finance.financesystem.dto.NotificationDto;
 import com.finance.financesystem.dto.TransactionDto;
+import com.finance.financesystem.dto.transactionrequest.NotificationRequest;
 import com.finance.financesystem.dto.transactionrequest.TransactionRequest;
 import com.finance.financesystem.entity.Account;
 import com.finance.financesystem.entity.Category;
+import com.finance.financesystem.entity.Notification;
 import com.finance.financesystem.entity.Transaction;
 import com.finance.financesystem.repository.AccountRepository;
 import com.finance.financesystem.repository.CategoryRepository;
+import com.finance.financesystem.repository.NotificationRepository;
 import com.finance.financesystem.repository.TransactionRepository;
 import com.finance.financesystem.service.TransactionService;
 import org.slf4j.Logger;
@@ -31,12 +35,16 @@ public class TransactionServiceImpl implements TransactionService {
 
     private final AccountRepository accountRepository;
 
+    private final NotificationRepository notificationRepository;
+
     private TransactionServiceImpl(TransactionRepository transactionRepository,
                                    CategoryRepository categoryRepository,
-                                   AccountRepository accountRepository) {
+                                   AccountRepository accountRepository,
+                                   NotificationRepository notificationRepository) {
         this.transactionRepository = transactionRepository;
         this.categoryRepository = categoryRepository;
         this.accountRepository = accountRepository;
+        this.notificationRepository = notificationRepository;
     }
 
     @Override
@@ -87,7 +95,26 @@ public class TransactionServiceImpl implements TransactionService {
 
         transaction = this.transactionRepository.save(transaction);
 
+        addNoticationTransaction(transactionRequest);
+
         return outcome + " with id " + transaction.getId();
+    }
+
+
+    public void addNoticationTransaction(TransactionRequest transactionRequest){
+        logger.info("Entro al servicio de transaction en el metodo addComentaryTransaction");
+
+        Notification notification = new Notification();
+        notification.setId(null);
+        notification.setMessage("");
+        notification.setType(transactionRequest.getType());
+        notification.setRead(false);
+        notification.setCreatedAt(LocalDateTime.now());
+        notification.setStatus(transactionRequest.getStatus());
+
+        this.notificationRepository.save(notification);
+
+        logger.info("Se guardo la notificacion");
     }
 }
 
