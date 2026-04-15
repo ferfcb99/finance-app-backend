@@ -42,6 +42,26 @@ public class Transaction {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "account_id")
+    private Account account;
+
+    public Transaction() {}
+
+    public Transaction(Long id, String type, Double amount, String description, Date transactionDate, LocalDateTime createdAt, LocalDateTime updatedAt, String status, String reference, Category category, Account account) {
+        this.id = id;
+        this.type = type;
+        this.amount = amount;
+        this.description = description;
+        this.transactionDate = transactionDate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.status = status;
+        this.reference = reference;
+        this.category = category;
+        this.account = account;
+    }
+
     public Long getId() {
         return id;
     }
@@ -122,6 +142,13 @@ public class Transaction {
         this.category = category;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     @Override
     public String toString() {
         return "Transaction{" +
@@ -135,6 +162,7 @@ public class Transaction {
                 ", status='" + status + '\'' +
                 ", reference='" + reference + '\'' +
                 ", category=" + category +
+                ", account=" + account +
                 '}';
     }
 }

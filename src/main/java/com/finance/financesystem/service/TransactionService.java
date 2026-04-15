@@ -1,16 +1,14 @@
 package com.finance.financesystem.service;
 
 import com.finance.financesystem.dto.TransactionDto;
+import com.finance.financesystem.dto.transactionrequest.TransactionRequest;
 
 import java.util.List;
 
 public interface TransactionService {
 
-    List<TransactionDto> getAllTransaction();
+    List<TransactionRequest> getAllTransactions();
 
-    TransactionDto getByIdTransaction(Long id);
+    String addTransaction(TransactionRequest transactionRequest);
 
-    TransactionDto createTransaction(TransactionDto transactionDto);
-
-    TransactionDto deleteByIdTransaction(Long id);
 }

@@ -1,18 +1,15 @@
 package com.finance.financesystem.controller;
 
 import com.finance.financesystem.dto.TransactionDto;
+import com.finance.financesystem.dto.transactionrequest.TransactionRequest;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface TransactionController {
 
-    ResponseEntity<List<TransactionDto>> getAllTransaction();
+    ResponseEntity<List<TransactionRequest>> getAllTransactionRequests();
 
-    ResponseEntity<TransactionDto> getByIdTransaction(Long id);
-
-    ResponseEntity<TransactionDto> createTransaction(TransactionDto transactionDto);
-
-    ResponseEntity<TransactionDto> deleteByIdTransaction(Long id);
+    ResponseEntity<String> addTransaction(TransactionRequest transactionRequest);
 
 }
